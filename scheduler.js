@@ -31,11 +31,20 @@ $(function() {
 
         // Add input element to the cell
         let inputElem = $("<textarea>");
+        inputElem.attr("id", `textareaID_${t}`);
+
+        let textareaMessage = localStorage.getItem(t);
+        if (textareaMessage !== "" || textareaMessage !== undefined) {
+            inputElem.val(textareaMessage);
+        }
+
         timeRowTDContent.append(inputElem);
         timeRowTDContent.addClass("past"); // TODO: make this dynamic
 
         // TODO Add Save Icon Image to the cell
-        let saveIconElem = $("<img>")
+        let saveIconElem = $("<button>");
+        saveIconElem.text("Save");
+        saveIconElem.attr("id", `buttonID_${t}`);
         timeRowTDSaveButton.append(saveIconElem);
         timeRowTDSaveButton.addClass("saveBtn");
 
@@ -48,3 +57,13 @@ $(function() {
     }
 
 })
+
+$(function() {
+    $("button").click(function() {
+        //console.log($(this).attr("id"));
+        // Gets the id we need to grab the text from the textarea
+        let textareaID = $(this).attr("id").split("_")[1];
+        let textareaElem = $(`#textareaID_${textareaID}`);
+        localStorage.setItem(textareaID, textareaElem.val());
+    });
+});
