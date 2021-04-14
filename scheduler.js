@@ -1,11 +1,15 @@
 // Displays the current day at the top
 $(function() {
-    $("#currentDay").text(moment().format("dddd MMMM do, YYYY"));
+    $("#currentDay").text(moment().format("dddd MMMM Do, YYYY"));
 });
 
 // Renders the rows between 9am and 5pm
 $(function() {
     
+    // Stores the current day if the user has never visited the page before
+    if (!localStorage.getItem("currentDay")) {
+        localStorage.setItem("currentDay", moment().format("MM DD YYYY"));
+    }
 
     // Populates content for each row
     for (let t = 9; t < 18; t++) {
@@ -33,6 +37,12 @@ $(function() {
         let inputElem = $("<textarea>");
         inputElem.attr("id", `textareaID_${t}`);
 
+        // If the day changed then clear out the calendar
+        if (hasDayChanged()) {
+            clearLocalStorage();
+        }
+
+        // If there's something in the localstorage message then stick it in the textarea
         let textareaMessage = localStorage.getItem(t);
         if (textareaMessage !== "" || textareaMessage !== undefined) {
             inputElem.val(textareaMessage);
@@ -56,7 +66,23 @@ $(function() {
         $("tbody").append(timeRowTR);
     }
 
-})
+});
+
+function clearLocalStorage() {
+    for (let t = 9; t < 18; t++) {
+        localStorage.setItem(t, "");
+    }
+}
+
+function hasDayChanged() {
+
+    let hasDayChanged = false;
+    if (localStorage.getItem("currentDay") !== moment().format("MM DD YYYY")) {
+        hasDayChanged = true;
+    }
+
+    return hasDayChanged;
+}
 
 $(function() {
     $("button").click(function() {
