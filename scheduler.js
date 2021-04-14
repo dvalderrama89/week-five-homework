@@ -49,7 +49,8 @@ $(function() {
         }
 
         timeRowTDContent.append(inputElem);
-        timeRowTDContent.addClass("past"); // TODO: make this dynamic
+
+        addTimeClass(timeRowTDContent, t);
 
         // TODO Add Save Icon Image to the cell
         let saveIconElem = $("<button>");
@@ -67,6 +68,27 @@ $(function() {
     }
 
 });
+
+// Handles adding the class that properly colors the background for the textarea container
+function addTimeClass(rowElem, rowIndex) {
+    let currentHour = parseInt(moment().format("hh"));
+    
+    // Put the current hour time format back into 24 hour time
+    // to calculate it properly against the rowIndex
+    if (currentHour < 9) {
+        currentHour = currentHour + 12;
+    }
+
+    if (rowIndex < currentHour) {
+        rowElem.addClass("past");
+    } else if (rowIndex === currentHour) {
+        rowElem.addClass("present");
+    } else if (rowIndex > currentHour) {
+        rowElem .addClass("future");
+    } else {
+        console.log("what");
+    }
+}
 
 function clearLocalStorage() {
     for (let t = 9; t < 18; t++) {
