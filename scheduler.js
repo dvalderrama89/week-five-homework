@@ -103,6 +103,7 @@ function hasDayChanged() {
     let hasDayChanged = false;
     if (localStorage.getItem("currentDay") !== moment().format("MM DD YYYY")) {
         hasDayChanged = true;
+        localStorage.setItem("currentDay", moment().format("MM DD YYYY"));
     }
 
     return hasDayChanged;
