@@ -18,6 +18,7 @@ $(function() {
         let timeRowTDSaveButton = $("<td>");
         timeRowTH.attr("scope", "row");
         timeRowTH.addClass("time-block");
+        timeRowTH.addClass("col-md");
         
         let hour = t;
         if (hour > 12) {
@@ -51,6 +52,7 @@ $(function() {
         timeRowTDContent.append(inputElem);
 
         addTimeClass(timeRowTDContent, t);
+        timeRowTDContent.addClass("col-md-8");
 
         // TODO Add Save Icon Image to the cell
         let saveIconElem = $("<button>");
@@ -58,6 +60,7 @@ $(function() {
         saveIconElem.attr("id", `buttonID_${t}`);
         timeRowTDSaveButton.append(saveIconElem);
         timeRowTDSaveButton.addClass("saveBtn");
+        timeRowTDSaveButton.addClass("col-md");
 
         // Add the content to the row and table body
         let timeRowTR = $("<tr>").append(timeRowTH);
