@@ -54,7 +54,6 @@ $(function() {
         addTimeClass(timeRowTDContent, t);
         timeRowTDContent.addClass("col-md-8");
 
-        // TODO Add Save Icon Image to the cell
         let saveIconElem = $("<button>");
         //saveIconElem.text("Save");
         saveIconElem.attr("id", `buttonID_${t}`);
@@ -111,7 +110,6 @@ function hasDayChanged() {
 
 $(function() {
     $("button").click(function() {
-        //console.log($(this).attr("id"));
         // Gets the id we need to grab the text from the textarea
         let textareaID = $(this).attr("id").split("_")[1];
         let textareaElem = $(`#textareaID_${textareaID}`);
