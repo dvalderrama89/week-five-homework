@@ -74,13 +74,7 @@ $(function() {
 
 // Handles adding the class that properly colors the background for the textarea container
 function addTimeClass(rowElem, rowIndex) {
-    let currentHour = parseInt(moment().format("hh"));
-    
-    // Put the current hour time format back into 24 hour time
-    // to calculate it properly against the rowIndex
-    if (currentHour < 9) {
-        currentHour = currentHour + 12;
-    }
+    let currentHour = parseInt(moment().format("HH"));
 
     if (rowIndex < currentHour) {
         rowElem.addClass("past");
