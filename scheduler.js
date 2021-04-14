@@ -56,11 +56,18 @@ $(function() {
 
         // TODO Add Save Icon Image to the cell
         let saveIconElem = $("<button>");
-        saveIconElem.text("Save");
+        //saveIconElem.text("Save");
         saveIconElem.attr("id", `buttonID_${t}`);
+
+        // Add img to go inside the button
+        let imgElem = $("<img>");
+        imgElem.attr("src", "assets/images/saveIcon.png");
+        saveIconElem.append(imgElem);
+
         timeRowTDSaveButton.append(saveIconElem);
         timeRowTDSaveButton.addClass("saveBtn");
         timeRowTDSaveButton.addClass("col-md");
+        timeRowTDSaveButton.addClass("text-center");
 
         // Add the content to the row and table body
         let timeRowTR = $("<tr>").append(timeRowTH);
@@ -81,9 +88,7 @@ function addTimeClass(rowElem, rowIndex) {
     } else if (rowIndex === currentHour) {
         rowElem.addClass("present");
     } else if (rowIndex > currentHour) {
-        rowElem .addClass("future");
-    } else {
-        console.log("what");
+        rowElem.addClass("future");
     }
 }
 
